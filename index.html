@@ -26,6 +26,7 @@
         }).then(model => {
             setInterval(() => {
                 model.detect(video).then(predictions => {
+                    console.log(predictions);
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
                     predictions.forEach(prediction => {
                         ctx.strokeStyle = "#00FF00";
@@ -34,6 +35,11 @@
                         ctx.fillStyle = "#00FF00";
                         ctx.font = "18px Arial";
                         ctx.fillText("Larva detectada", prediction.bbox.x - prediction.bbox.width / 2, prediction.bbox.y - prediction.bbox.height / 2 - 5);
+                    });
+                }).catch(error => {
+                    console.error(error);
+                });
+            }, 500);
                     });
                 });
             }, 500);
